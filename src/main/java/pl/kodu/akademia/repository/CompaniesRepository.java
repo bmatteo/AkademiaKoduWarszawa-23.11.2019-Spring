@@ -1,6 +1,7 @@
 package pl.kodu.akademia.repository;
 
 import pl.kodu.akademia.model.Company;
+import pl.kodu.akademia.services.CompanyService;
 
 import java.util.ArrayList;
 import java.util.List;

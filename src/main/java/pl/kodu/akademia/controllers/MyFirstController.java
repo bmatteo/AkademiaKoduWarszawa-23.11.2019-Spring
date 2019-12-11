@@ -1,5 +1,6 @@
 package pl.kodu.akademia.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,12 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.kodu.akademia.model.Company;
 import pl.kodu.akademia.repository.CompaniesRepository;
+import pl.kodu.akademia.services.CompanyService;
 
 import java.util.List;
 import java.util.Random;
 
 @Controller
 public class MyFirstController {
+
+    @Autowired
+    CompanyService companyService;
 
     @RequestMapping("/index")
     public String hello() {
@@ -52,12 +57,17 @@ public class MyFirstController {
                                 @RequestParam() String newCompanyKrs,
                                 @RequestParam() String newCompanyNip,
                                 @RequestParam() String newCompanyRegon) {
-        Random random = new Random();
+        /*Random random = new Random();
         int id = random.nextInt(8999) + 1000;
         Company newCompany = new Company(id, newCompanyNip,
                 newCompanyRegon, newCompanyKrs, newCompanyName);
 
-        CompaniesRepository.addNewCompany(newCompany);
+        CompaniesRepository.addNewCompany(newCompany);*/
+        Company newCompany = new Company(10, newCompanyNip,
+                newCompanyRegon, newCompanyKrs, newCompanyName);
+
+        this.companyService.saveCompany(newCompany);
+
         return "result";
     }
 
